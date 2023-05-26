@@ -1,0 +1,131 @@
+<div class="widget-container home">
+  <h1>Pharmacies near me</h1>
+  
+  <div class="filter-container">
+    <span class="filterName">Filters</span>
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Filter Option</mat-label>
+        <mat-select [(ngModel)]="selectedMedicine" multiple>
+          <mat-option *ngFor="let med of allMedicine" [value]="med" (click)="med.quantity=0;updateMedicine(med)">
+            {{med.medicine.Name}} <span *ngIf="med.quantity != 0">({{med.quantity}})</span> 
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <div style="width:70%;display:inline-block;">
+      <mat-form-field style="margin-right:20px;">
+        <mat-label>Quantity</mat-label>
+        <input matInput [(ngModel)]="quantityfilter" type="number"/>
+        <mat-hint>Selecting a medicine will apply this quantity to it</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Filter Option</mat-label>
+        <mat-select [(ngModel)]="filterOption">
+          <mat-option value="1">
+            Cheapest option
+          </mat-option>
+          <mat-option value="2">
+            Closest option
+          </mat-option>
+          <mat-option value="3">
+            Pharmacies with all medicines from list
+          </mat-option>
+          <mat-option value="4">
+            Pharmacies with at least one medicine
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div style="width: 30%;display:inline-block; ">
+      <button mat-stroked-button color="primary" (click)="ApplyFilters()">Apply Filters</button>
+      <mat-spinner *ngIf="loadingMarkers" diameter="24" style="display:inline-block;vertical-align:middle;"></mat-spinner>
+    </div>
+  </div>
+
+  <agm-map [latitude]="lat"
+           [longitude]="lng"
+           [zoom]="zoom"
+           [disableDefaultUI]="false"
+           [zoomControl]="false"
+           (mapClick)="mapClicked($event)">
+
+    <agm-marker
+                (markerClick)="clickedMarker(yourLocation.label, 0)"
+                [latitude]="yourLocation.lat"
+                [longitude]="yourLocation.lng"
+                [label]="yourLocation.label"
+                [iconUrl]="yourLocation.icon"
+                [markerDraggable]="yourLocation.draggable"
+                (dragEnd)="markerDragEnd(yourLocation, $event)">
+
+      <agm-info-window>
+        <div [innerHTML]="yourLocation.description"></div>
+      </agm-info-window>
+
+    </agm-marker>
+
+
+    <agm-marker *ngFor="let m of markers; let i = index"
+                (markerClick)="clickedMarker(m.label, i)"
+                [latitude]="m.lat"
+                [longitude]="m.lng"
+                [label]="m.label"
+                [iconUrl]="m.icon"
+                [markerDraggable]="m.draggable"
+                (dragEnd)="markerDragEnd(m, $event)">
+
+      <agm-info-window >
+        <div>
+          <strong style="font-size:16px;" class="primary-text">{{m.name}}</strong>
+        </div>
+        <br />
+        <div [innerHTML]="m.description"></div>
+        <br />
+        <div *ngIf="m.distance">
+          <span>Current Distance: <strong class="primary-text"> {{m.distance}}</strong></span><br/>
+          <span>Current Duration:<strong class="primary-text"> {{m.duration}}</strong></span>
+        </div>
+        <div style=" width:200px; margin-top:10px;" *ngIf="m.containsOne" >
+          <strong>Total price</strong>
+          <div *ngFor="let medicine of m.allAvailableMedicine">
+
+            <div style="text-align:left;width:50%;display:inline-block; font-weight:bold; font-size:14px;" class="primary-text">
+
+              {{medicine.name}}
+
+            </div>
+            <div style="text-align: right; width: 50%; display: inline-block; ">
+              {{medicine.quantity}}
+
+            </div>
+            <div style="text-align: left; width: 50%; display: inline-block; text-decoration:line-through; color:gray;">
+              {{medicine.singlePrice}}
+
+            </div>
+            <div style="text-align: right; width: 50%; display: inline-block; font-weight:bold">
+              {{medicine.totalPrice}}
+
+            </div>
+          </div>
+
+          <div style="width:100%; text-align:right; font-size:14px; margin-top:10px;">
+            Total price: <strong class="primary-text">{{m.totalPrice.toFixed(2)}}</strong> 
+          </div>
+        </div>
+      </agm-info-window>
+
+    </agm-marker>
+
+    <!--<agm-circle [latitude]="lat + 0.3" [longitude]="lng"
+              [radius]="5000"
+              [fillColor]="'red'"
+              [circleDraggable]="true"
+              [editable]="true">
+  </agm-circle>-->
+
+  </agm-map>
+
+</div>  

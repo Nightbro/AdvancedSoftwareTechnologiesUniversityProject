@@ -1,0 +1,22 @@
+<h1>Add medicine</h1>
+<form [formGroup]="form"  autocomplete="off">
+  <div style="text-align:center;">
+    <mat-form-field>
+      <input matInput placeholder="Barcode" formControlName="barcode" required>
+      <mat-hint *ngIf="!barcodeInput.value">This field is required</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" required>
+      <mat-hint *ngIf="!nameInput.value">This field is required</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" required>
+      <mat-hint *ngIf="!descriptionInput.value">This field is required</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="OnSave()">Save</button>
+    <button mat-stroked-button color="primary" (click)="OnCancel()">Close</button>
+  </div>
+
+</form>

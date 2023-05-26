@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+//@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'theme.scss';
+
+@font-face {
+  font-family: 'ApplicationFont';
+  src: url('assets/PlayfairDisplay-VariableFont_wght.ttf')
+}
+
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'ApplicationFont', Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+
+.clickable {
+    cursor: pointer;
+}
+
+.widget-container {
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 20px;
+  min-width: 400px;
+
+  h1 {
+    font-family: ApplicationFont;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  hr {
+    width: 70%;
+  }
+
+  .mat-dialog-container {
+    background-color: rgba(0,0,0,0);
+  }
+}
+
+
+.widget-container-modal {
+  border: 1px solid;
+  border-radius: 20px;
+  min-width: 400px;
+
+  h1 {
+    font-family: ApplicationFont;
+    text-align: center;
+    font-size: 36px;
+  }
+
+  hr {
+    width: 70%;
+  }
+
+  .mat-dialog-container {
+    background-color: rgba(256,256,256,0.8);
+    padding:20px;
+  }
+}
+
+
+.center {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

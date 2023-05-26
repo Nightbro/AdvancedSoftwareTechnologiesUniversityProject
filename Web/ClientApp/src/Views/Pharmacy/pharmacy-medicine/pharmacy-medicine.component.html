@@ -1,0 +1,84 @@
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: start;">
+
+
+  <div class="widget-container roles" *ngIf="loading">
+    <div class="center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <div class="widget-container roles" *ngIf="error">
+    <div class="center">
+      <span class="warn-text">{{error}}</span>
+    </div>
+  </div>
+
+
+  <div [hidden]="loading">
+    <table mat-table [dataSource]="dataSource" #pharmacySort="matSort" matSort class="mat-elevation-z8 role-table" style="width:100%;">
+
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row)" [ngClass]="{'inverted-table-row': selected && selected.Id == row.Id}"></tr>
+    </table>
+
+    <mat-paginator #pharmacyPaginator='matPaginator' [pageSizeOptions]="[5, 10]" class="mat-elevation-z8" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <div class="widget-container" *ngIf="!selected" style="text-align:center;">
+    <span class="primary-text">Please select pharmacy to start or </span>
+    <div class="button-container">
+
+      <form [formGroup]="dataForm" style="display:flex; justify-content:space-around;" >
+        <button mat-stroked-button color="primary" (click)="file.click();">Update via csv file</button>
+
+        <input formControlName="file" id="file" type="file" (change)="OnFileChange($event)" style="display:none;" accept=".csv" #file />
+
+      </form>
+    </div>
+    <span class="primary-text">
+      You can download a sample file
+      <a download="example.csv" target="_blank" href="/assets/samplePharmacyMedicine.csv" >here</a>.
+    </span>
+
+  </div>
+
+  <div class="widget-container" [hidden]="!selected" style="text-align:center;">
+    <table mat-table [dataSource]="dataSourcePharmacy" #medicineSort="matSort" matSort class="mat-elevation-z8 role-table" style="width:100%;">
+
+      <ng-container matColumnDef="IdMedicine">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Medicine</th>
+        <td mat-cell *matCellDef="let element" style="text-align:left;"> {{getMedicineName(element.IdMedicine)}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let element" style="text-align:left;"> {{element.Price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let element" style="text-align:left;"> {{element.Quantity}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsMedicine"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsMedicine;" (click)="updateMedicine(row)"></tr>
+    </table>
+
+    <mat-paginator #medicinePaginator='matPaginator' [pageSizeOptions]="[10, 20, 50]" class="mat-elevation-z8" showFirstLastButtons></mat-paginator>
+    <div class="button-container" style="margin-top:20px;">
+      <button mat-stroked-button color="primary" (click)="updateMedicine(null)">Add a new medicine</button>
+
+    </div>
+  </div>
+</div>

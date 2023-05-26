@@ -1,0 +1,83 @@
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap; align-items: start;">
+
+
+  <div class="widget-container roles" *ngIf="loading">
+    <div class="center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <div class="widget-container roles" *ngIf="error">
+    <div class="center">
+      <span class="warn-text">{{error}}</span>
+    </div>
+  </div>
+
+
+  <div [hidden]="loading">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 role-table" style="width:100%;">
+
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id</th>
+        <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="select(row)" [ngClass]="{'inverted-table-row': selected && selected.Id == row.Id}"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20, 50]" class="mat-elevation-z8" showFirstLastButtons></mat-paginator>
+  </div>
+
+  <div class="widget-container" *ngIf="!selected" style="text-align:center;">
+    <span class="primary-text">Please select pharmacy to start or </span>
+    <div class="button-container">
+      <button mat-stroked-button color="primary" (click)="add()">Add a new pharmacy </button>
+    </div>
+  </div>
+  <div class="widget-container" *ngIf="selected">
+    <form [formGroup]="form">
+
+
+      <div style="display:flex;justify-content:space-around;">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" required>
+          <mat-hint *ngIf="!nameInput.value">Enter pharmacy  name</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div style="display:flex;justify-content:space-around;">
+        <mat-form-field>
+          <input matInput placeholder="Longitude" formControlName="longitude" required>
+          <mat-hint *ngIf="!longitudeInput.value">Enter pharmacy  name</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div style="display:flex;justify-content:space-around;">
+        <mat-form-field>
+          <input matInput placeholder="Latitude" formControlName="latitude" required>
+          <mat-hint *ngIf="!latitudeInput.value">Enter pharmacy  name</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div style="display:flex;justify-content:space-around;">
+        <mat-form-field>
+          <textarea matInput placeholder="Description" formControlName="description" required rows="5"></textarea>
+          <mat-hint *ngIf="!descriptionInput.value">Enter description</mat-hint>
+        </mat-form-field>
+      </div>
+
+    </form>
+
+    <div class="button-container" style="text-align:center;">
+      <button mat-stroked-button color="primary" (click)="UpdateData()">Save changes</button>
+      <button mat-stroked-button color="warning" (click)="DeleteData()">Delete</button>
+    </div>
+
+  </div>
+</div>

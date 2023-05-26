@@ -1,0 +1,43 @@
+<section>
+  <div class="toolbar primary-border">
+    <a routerLink="/home">
+      <img src="../assets/logo.svg" />
+    </a>
+    <span class="title primary-text big-title">Pharmacy Near Me</span>
+    <span class="title primary-text small-title">PNM</span>
+    <mat-icon (click)="drawer.toggle()" class="clickable" color="primary">menu</mat-icon>
+    <span class="example-spacer"></span>
+
+    <div class="user-info-container">
+      <div class="user-info hide-on-extra-small">
+        <div class="name primary-text ">{{EmployeeName}}</div>
+        <div class="role primary-text">{{EmployeeRole}}</div>
+      </div>  
+      <div class="avatar-container"> 
+        <ngx-avatar name="{{EmployeeName}}" bgColor="#3E3E6B" fgColor="#FFFFFF" size="48" src="{{photo}}"></ngx-avatar> 
+
+      </div> 
+    </div>  
+  </div> 
+   
+  
+  <mat-drawer-container class="example-container" [hasBackdrop]="!sidenavSticky">
+    <mat-drawer #drawer [mode]="sidenavSticky ? sidenavModeOnScreen : sidenavModeSticky" [ngClass]="{'sticky':sidenavSticky , 'floating':!sidenavSticky}" class="primary-border" opened>
+      <div class="menu">
+        <app-left-panel></app-left-panel>
+        <span class="example-spacer"></span> 
+        <mat-slide-toggle class="example-margin" color="primary"
+                          [(ngModel)]="sidenavSticky">   
+          <span class="primary-text">Keep side menu on screen</span>
+        </mat-slide-toggle> 
+        <div style="text-align:center;">
+          <div style="vertical-align:top; display:inline-block; margin-top:2px;">Copyright</div>
+           <mat-icon color="primary">copyright</mat-icon>
+        </div>
+      </div> 
+    </mat-drawer> 
+    <mat-drawer-content>
+        <router-outlet></router-outlet> 
+    </mat-drawer-content>
+  </mat-drawer-container>
+</section>  

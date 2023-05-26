@@ -1,0 +1,35 @@
+:host{
+    width:80%;
+}
+agm-map{
+    height:500px;
+}
+.home {
+    width:100%;
+}
+
+
+.filter-container {
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  min-width:50%;
+  width:500px;
+  max-width:100%;
+
+
+  .filterName {
+    margin-left: 10px;
+    position: absolute;
+    margin-top: -30px;
+    background-color: rgb(232,252,253);
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+  }
+}
+.example-full-width {
+  width: 100%;
+}

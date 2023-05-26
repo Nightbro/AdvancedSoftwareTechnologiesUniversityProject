@@ -1,0 +1,35 @@
+
+<div class="widget-container login" *ngIf="!newUser">
+  <div class="title">
+    <h1>Login</h1>
+    <hr />
+  </div>
+
+  <form [formGroup]="signin" (ngSubmit)="login()" autocomplete="off" >
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username" required>
+        <mat-hint *ngIf="!usernameInput.value">Enter your username</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+        <mat-icon matSuffix (click)="hidePassword = !hidePassword" color="primary">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="error-container warn-text">
+      <span>{{error}}</span>
+    </div>
+    <div class="button-container">
+      <button mat-stroked-button color="primary" [disabled]="!signin">Login</button>
+      <button mat-stroked-button color="primary" (click)="CreateAProfile();  $event.preventDefault()">Create a profile</button>
+    </div>
+
+  </form>
+
+
+</div>
+<div *ngIf="newUser">
+  <app-profile [user]="newUser"></app-profile>
+</div>

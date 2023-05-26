@@ -1,0 +1,116 @@
+@use '~@angular/material' as mat;
+@import '~@angular/material/theming';
+@include mat.core();
+
+// Define the default theme
+$black-yellow-color: ( 50 : #e4e4e3, 100 : #bcbbb9, 200 : #908e8a, 300 : #63615b, 400 : #413f37, 500 : #201d14, 600 : #1c1a12, 700 : #18150e, 800 : #13110b, 900 : #0b0a06, A100 : #ffc151, A200 : #ffaf1e, A400 : #ea9700, A700 : #d08700, contrast: ( 50 : #fdfcf5, 100 : #faf8e6, 200 : #f7f4d5, 300 : #f3efc4, 400 : #f1ebb7, 500 : #eee8aa, 600 : #ece5a3, 700 : #e9e299, 800 : #e7de90, 900 : #e2d87f, A100 : #ffffff, A200 : #ffffff, A400 : #ffffff, A700 : #fffdea ));
+
+$palegoldenrod: ( 50 : #fdfcf5, 100 : #faf8e6, 200 : #f7f4d5, 300 : #f3efc4, 400 : #f1ebb7, 500 : #eee8aa, 600 : #ece5a3, 700 : #e9e299, 800 : #e7de90, 900 : #e2d87f, A100 : #ffffff, A200 : #ffffff, A400 : #ffffff, A700 : #fffdea, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #000000, 400 : #000000, 500 : #000000, 600 : #000000, 700 : #000000, 800 : #000000, 900 : #000000, A100 : #000000, A200 : #000000, A400 : #000000, A700 : #000000, ) );
+
+$paleblueaccent: ( 50 : #f2f6fc, 100 : #dee9f8, 200 : #c8daf3, 300 : #b1cbee, 400 : #a1bfeb, 500 : #90b4e7, 600 : #88ade4, 700 : #7da4e0, 800 : #739cdd, 900 : #618cd7, A100 : #ffffff, A200 : #ffffff, A400 : #dde9ff, A700 : #c3d9ff, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #000000, 400 : #000000, 500 : #000000, 600 : #000000, 700 : #000000, 800 : #000000, 900 : #000000, A100 : #000000, A200 : #000000, A400 : #000000, A700 : #000000, ) );
+
+$palepinkwarn: ( 50 : #fcf2f4, 100 : #f8dee3, 200 : #f3c8d0, 300 : #eeb1bd, 400 : #eba1af, 500 : #e790a1, 600 : #e48899, 700 : #e07d8f, 800 : #dd7385, 900 : #d76174, A100 : #ffffff, A200 : #ffffff, A400 : #ffdde2, A700 : #ffc3cd, contrast: ( 50 : #000000, 100 : #000000, 200 : #000000, 300 : #000000, 400 : #000000, 500 : #000000, 600 : #000000, 700 : #000000, 800 : #000000, 900 : #000000, A100 : #000000, A200 : #000000, A400 : #000000, A700 : #000000, ) );
+
+
+
+$lightPrimary: ( 50 : #e3f6f9, 100 : #b9e8f1, 200 : #8ad8e7, 300 : #5bc8dd, 400 : #38bdd6, 500 : #15b1cf, 600 : #12aaca, 700 : #0fa1c3, 800 : #0c98bd, 900 : #0688b2, A100 : #dcf5ff, A200 : #a9e7ff, A400 : #76d9ff, A700 : #5dd2ff, contrast: ( 50 : #f3e4e0, 100 : #e1bab3, 200 : #ce8d80, 300 : #ba5f4d, 400 : #ab3c26, 500 : #9c1a00, 600 : #941700, 700 : #8a1300, 800 : #800f00, 900 : #6e0800, A100 : #ff9f9d, A200 : #ff6d6a, A400 : #ff3b37, A700 : #ff221e ) );
+
+$darkPrimary: ( 50 : #e8e8ed, 100 : #c5c5d3, 200 : #9f9fb5, 300 : #787897, 400 : #5b5b81, 500 : #3e3e6b, 600 : #383863, 700 : #303058, 800 : #28284e, 900 : #1b1b3c, A100 : #7f7fff, A200 : #4c4cff, A400 : #1919ff, A700 : #0000fe, contrast: ( 50 : #faf1e9, 100 : #f2ddc9, 200 : #eac7a5, 300 : #e2b080, 400 : #db9f65, 500 : #d58e4a, 600 : #d08643, 700 : #ca7b3a, 800 : #c47132, 900 : #ba5f22, A100 : #fff9f5, A200 : #ffd9c2, A400 : #ffb88f, A700 : #ffa875 ) );
+
+
+
+$rm-app-accent: mat.define-palette($paleblueaccent, 400, 500, 300);
+$rm-app-warn: mat.define-palette($palepinkwarn, 800, 900, 700);
+$rm-black: mat.define-palette($black-yellow-color, 800, 900, 700);
+
+
+
+$lightPalete: mat.define-palette($lightPrimary, 800,900, 700);
+$darkPalete: mat.define-palette($darkPrimary, 800,900, 700);
+
+
+$rm-paleGold-theme: mat.define-light-theme($darkPalete, $rm-app-accent, $rm-app-warn);
+
+
+@include mat.all-component-themes($rm-paleGold-theme);
+//@include mat-core-theme($rm-app-theme);
+
+/*@include mat.core-theme($rm-paleGold-theme);
+@include mat.toolbar-theme($rm-paleGold-theme);
+// Include the default theme styles.
+@include mat.checkbox-theme($rm-paleGold-theme);
+@include mat.slide-toggle-theme($rm-paleGold-theme);
+@include mat.icon-theme($rm-paleGold-theme);
+
+@include mat.form-field-theme($rm-paleGold-theme);
+@include mat.input-theme($rm-paleGold-theme);
+@include mat.select-theme($rm-paleGold-theme);
+@include mat.button-theme($rm-paleGold-theme);
+@include mat.snack-bar-theme($rm-paleGold-theme);*/
+
+
+$black: mat.get-color-from-palette($rm-black);
+$paleGold: mat.get-color-from-palette($lightPalete);
+$warning: mat.get-color-from-palette($rm-app-warn);
+
+
+
+
+
+
+mat-drawer.sticky,
+.toolbar,
+.primary-border,
+.widget-container {
+  background-image: linear-gradient(140deg, rgba(174,255,255,0.2) 0%, rgba(21,177,207,0.4) 90%, rgba(98,254,255,0.2) 100%) !important;
+}
+
+mat-drawer.floating {
+  background-image: linear-gradient(140deg, rgba(174,255,255,0.8) 0%, rgba(21,177,207,0.6) 90%, rgba(98,254,255,0.8) 100%) !important;
+}
+
+
+.primary-border,
+.widget-container {
+  border-color: $paleGold !important;
+  
+
+  h1 {
+    color: $paleGold;
+  }
+
+  hr {
+    border-color: $paleGold;
+  }
+}
+
+.primary-text {
+    color: $paleGold;
+}
+.warn-text {
+    color: $warning;
+}
+
+
+
+.mat-cell, .mat-paginator, .mat-paginator-page-size .mat-select-trigger, .mat-paginator-page-size .mat-select-trigger .mat-select-value, .mat-paginator-page-size .mat-select-trigger .mat-select-arrow{
+  color: $paleGold;
+  
+}
+
+.inverted-table-row {
+  background-color: $paleGold;
+
+  .mat-cell, .mat-paginator, .mat-paginator-page-size .mat-select-trigger, .mat-paginator-page-size .mat-select-trigger .mat-select-value, .mat-paginator-page-size .mat-select-trigger .mat-select-arrow {
+    color: $black;
+  }
+}
+.mat-row {
+    cursor:pointer;
+}
+.mat-row:hover {
+  background-color:rgba(24, 21, 14,0.2)
+}
+.inverted-table-row:hover {
+  background-color: $paleGold;
+}

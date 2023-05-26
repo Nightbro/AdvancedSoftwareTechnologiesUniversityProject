@@ -1,0 +1,15 @@
+<h1>{{data.Id==-1 ? 'Add' : 'Update'}} role</h1>
+<form [formGroup]="form"  autocomplete="off">
+  <div style="text-align:center;">
+    <mat-form-field>
+      <input matInput placeholder="Title" formControlName="title" required>
+      <mat-hint *ngIf="!titleInput.value">This field is required</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-stroked-button color="primary" [disabled]="!form.valid" (click)="OnSave()">Save</button>
+    <button mat-stroked-button color="primary" *ngIf="data.Id!==-1" (click)="OnDelete()">Delete</button>
+    <button mat-stroked-button color="primary" (click)="OnCancel()">Close</button>
+  </div>
+
+</form>

@@ -1,0 +1,72 @@
+<nav>
+  <div class="category">
+    <span class="primary-text title">Main</span>
+    <div class="links">
+      <div class="link">
+        <mat-icon color="primary">store</mat-icon>
+        <a routerLink="/home" class="primary-text">Home</a>
+      </div>
+
+    </div>
+  </div>
+  <div class="category">
+    <span class="primary-text title">Profile</span>
+    <div class="links">
+      <div class="link" *ngIf="!loggedFlag">
+        <mat-icon color="primary">face</mat-icon>
+        <a routerLink="/login" class="primary-text">Login</a>
+      </div>
+      <div class="link" *ngIf="loggedFlag">
+        <mat-icon color="primary">face</mat-icon>
+        <a routerLink="/profile" class="primary-text">My profile</a>
+      </div>
+      <div class="link" *ngIf="loggedFlag">
+        <mat-icon color="primary">logout</mat-icon>
+        <a routerLink="/logout" class="primary-text">Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="category" *ngIf="loggedFlag && (containsClaim(4) || containsClaim(5) || containsClaim(6) || containsClaim(7)) ">
+    <span class="primary-text title">Pharmacies</span>
+    <div class="links" *ngIf="containsClaim(4) || containsClaim(5)">
+      <div class="link">
+        <mat-icon color="primary">assessment</mat-icon>
+        <a routerLink="pharmacy/pharmacy" class="primary-text">Pharmacy</a>
+      </div>
+    </div>
+
+    <div class="links" *ngIf="containsClaim(6) || containsClaim(7)">
+      <div class="link">
+        <mat-icon color="primary">shopping_basket</mat-icon>
+        <a routerLink="pharmacy/medicine" class="primary-text">Medicine</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="category" *ngIf="loggedFlag && containsClaim(3)">
+    <span class="primary-text title">Data</span>
+    <div class="links" *ngIf="containsClaim(3)">
+      <div class="link">
+        <mat-icon color="primary">shop_2</mat-icon>
+        <a routerLink="data/medicine" class="primary-text">Medicines</a>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="category" *ngIf="loggedFlag && (containsClaim(1) || containsClaim(2)) ">
+    <span class="primary-text title">Admin</span>
+    <div class="links" *ngIf="containsClaim(2)">
+      <div class="link">
+        <mat-icon color="primary">people</mat-icon>
+        <a routerLink="admin/users" class="primary-text">Users</a>
+      </div>
+
+      <div class="link" *ngIf="containsClaim(1)">
+        <mat-icon color="primary">manage_accounts</mat-icon>
+        <a routerLink="admin/roles" class="primary-text">Roles</a>
+      </div>
+    </div>
+  </div>
+</nav>

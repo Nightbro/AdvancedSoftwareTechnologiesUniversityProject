@@ -1,0 +1,31 @@
+.category {
+  margin-top: 20px;
+
+  .title {
+    font-size: 24px;
+  }
+
+  .links {
+    margin-left: 10px;
+
+    .link {
+
+      mat-icon {
+      }
+
+      a {
+        display: inline-block;
+        text-decoration: none;
+        margin-top: 4px;
+        margin-left:4px;
+        font-size: 16px;
+        outline: 0;
+        vertical-align:top;
+      }
+
+      a:focus {
+        outline: 0;
+      }
+    }
+  }
+}
