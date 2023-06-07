@@ -3,7 +3,6 @@ using Interfaces.Map;
 using Interfaces.Repository;
 using Interfaces.Service;
 using Maps;
-using Repositories.Core;
 using Repositories.Repositories;
 using Services;
 
@@ -21,7 +20,6 @@ namespace DependencyInjectionConfiguration
             services.AddScoped<IPharmacyMap, PharmacyMap>();
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
-            services.AddScoped<IDapper, Dapperr>();
 
         }
     }

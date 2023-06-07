@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.signin.valid) return;
     let auth = new Login();
     auth.Username = this.usernameInput.value;
-    auth.Password = sha512.sha512(this.passwordInput.value);
-   // auth.Password = this.passwordInput.value;
+    //auth.Password = sha512.sha512(this.passwordInput.value);
+   auth.Password = this.passwordInput.value;
     this.authenticationService.Authorize(auth).subscribe(token => {
       this.router.navigate(['/home']);
     }, error => {

@@ -8,7 +8,7 @@ export class ConfigService {
   private _config: { [key: string]: string };
   constructor() {
     this._config = {
-      PathAPI: 'https://localhost:44315/'
+      PathAPI: 'https://localhost:44315/api/'
     };
   }
   get setting(): { [key: string]: string } {
